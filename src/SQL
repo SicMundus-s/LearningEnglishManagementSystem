@@ -1,25 +1,29 @@
 create table popular_words(
-    word varchar not null UNIQUE,
-    translate varchar not null
+                              word varchar not null UNIQUE,
+                              translate varchar not null
 );
 
 create table words(
-    word varchar not null UNIQUE,
-    translate varchar not null
+                      word varchar not null UNIQUE,
+                      translate varchar not null
 );
 
 create table users(
-    id int generated always as identity unique,
-    name varchar(100) not null,
-    surname varchar(100) not null,
-    email_address varchar(150) not null,
-    popular_words_id varchar REFERENCES popular_words(word)
+                      id int generated always as identity unique,
+                      "name" varchar(100) not null,
+                      surname varchar(100) not null,
+                      "password" varchar(100) not null,
+                      email_address varchar(150) not null,
+                      popular_words_id varchar REFERENCES popular_words(word)
 );
 
 create table incorrect_translation(
-    "user" int references users(id),
-    word varchar references popular_words(word)
+                                      "user" int references users(id),
+                                      word varchar references popular_words(word)
 );
+
+alter table users
+    add column "password" varchar(100) not null ;
 
 drop table popular_words;
 drop table words;

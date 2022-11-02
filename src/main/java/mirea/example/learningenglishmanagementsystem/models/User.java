@@ -9,8 +9,8 @@ import javax.persistence.*;
 
 @Entity
 @Data
+@Table(name = "users")
 @NoArgsConstructor
-@AllArgsConstructor
 public class User {
 
     @Id
@@ -20,6 +20,8 @@ public class User {
     private String name;
 
     private String surname;
+
+    private String password;
 
     @Column(name = "email_address")
     private String emailAddress;
