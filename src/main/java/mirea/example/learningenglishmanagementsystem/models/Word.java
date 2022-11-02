@@ -5,13 +5,25 @@ package mirea.example.learningenglishmanagementsystem.models;
 // ToDo Добавить поле boolean - ответил правильно/неправильно 1. Ответил правильно - слову ставится true, ответил неправильно - false
 //  Тогда слово переходит в раздел интервального повторения
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Data
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Word {
-    private int id;
+
+    @Id
     private String word;
-    private String[] wordTranslation;
+
+    private String translation;
+
+
     //private Boolean didTheUserTranslateCorrectly;
     //private User user;
 }

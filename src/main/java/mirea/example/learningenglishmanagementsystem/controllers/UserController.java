@@ -1,7 +1,4 @@
 package mirea.example.learningenglishmanagementsystem.controllers;
 
-
-public class WordController {
-
-
+public class UserController {
 }
