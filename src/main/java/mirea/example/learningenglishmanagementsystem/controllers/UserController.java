@@ -1,12 +1,11 @@
 package mirea.example.learningenglishmanagementsystem.controllers;
 
+import mirea.example.learningenglishmanagementsystem.dto.UserDTO;
 import mirea.example.learningenglishmanagementsystem.models.User;
 import mirea.example.learningenglishmanagementsystem.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
 
     private final UserService userService;
+    private final ModelMapper modelMapper;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, ModelMapper modelMapper) {
         this.userService = userService;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping("/registration")
@@ -28,15 +29,17 @@ public class UserController {
     }
 
     @PostMapping()
-    public String registration(@ModelAttribute("user") User user, BindingResult bindingResult) {
+    public String registration(@ModelAttribute("user") UserDTO userDTO, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             return "registration";
         }
 
-
-        userService.save(user);
-
+        userService.save(convertToUser(userDTO));
         return "redirect:/user";
+    }
+
+    private User convertToUser(UserDTO userDTO) {
+        return modelMapper.map(userDTO, User.class);
     }
 
 }
