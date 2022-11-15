@@ -2,7 +2,7 @@ package mirea.example.learningenglishmanagementsystem.controllers;
 
 import mirea.example.learningenglishmanagementsystem.dto.UserDTO;
 import mirea.example.learningenglishmanagementsystem.models.User;
-import mirea.example.learningenglishmanagementsystem.service.UserService;
+import mirea.example.learningenglishmanagementsystem.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/SimpleEnglish")
+@RequestMapping("/simple-english")
 public class UserController {
 
     private final UserService userService;

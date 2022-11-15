@@ -1,4 +1,4 @@
-package mirea.example.learningenglishmanagementsystem.service;
+package mirea.example.learningenglishmanagementsystem.services;
 
 import mirea.example.learningenglishmanagementsystem.models.User;
 import mirea.example.learningenglishmanagementsystem.repositories.UserRepository;

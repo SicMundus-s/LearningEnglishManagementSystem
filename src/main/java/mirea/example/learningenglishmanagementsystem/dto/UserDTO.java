@@ -10,10 +10,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class UserDTO {
 
-    private String name;
+    @Column(name = "login")
+    private String login;
 
-    private String surname;
-
+    @Column(name = "password")
     private String password;
 
     @Column(name = "email_address")
