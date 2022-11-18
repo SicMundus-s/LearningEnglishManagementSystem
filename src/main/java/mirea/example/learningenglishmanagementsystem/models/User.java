@@ -4,12 +4,8 @@ package mirea.example.learningenglishmanagementsystem.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import mirea.example.learningenglishmanagementsystem.enums.Role;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -35,4 +31,7 @@ public class User {
     @Column(name = "popular_words_id")
     private String popularWordId;
 
+    @ManyToMany
+    @JoinTable
+    private Set<Role> roles;
 }

@@ -3,14 +3,12 @@ package mirea.example.learningenglishmanagementsystem.security;
 import lombok.AllArgsConstructor;
 import mirea.example.learningenglishmanagementsystem.models.User;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @AllArgsConstructor
-public class SecurityUser implements UserDetails {
+public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
 
     private final User user;
 

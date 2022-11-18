@@ -6,13 +6,13 @@
 </head>
 <body>
 
-<form th:method="POST" th:action="@{/SimpleEnglish}" th:object="${user}">
+<form th:method="POST" th:action="@{/user}" th:object="${user}">
     <label for="login">Enter login: </label>
     <input type="text" th:field="*{login}" id="login"/>
     <div style="color:green" th:if="${#fields.hasErrors('login')}" th:errors="*{login}">login Error</div>
     <br/>
     <label for="password">Enter password: </label>
-    <input type="text" th:field="*{password}" id="password"/>
+    <input type="password" th:field="*{password}" id="password"/>
     <div style="color:green" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password Error</div>
     <br/>
     <label for="emailAddress">Enter email: </label>
