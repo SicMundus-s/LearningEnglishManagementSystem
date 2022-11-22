@@ -20,7 +20,7 @@ public class RegistrationController {
     private final UserService userService;
     private final ModelMapper modelMapper;
 
-    @GetMapping("/login")
+    @GetMapping(value = {"/", "/login"})
     public String showLogin() {
         return "login";
     }

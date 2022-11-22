@@ -5,10 +5,10 @@ import mirea.example.learningenglishmanagementsystem.models.User;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
-public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
+public class SecurityUserDetails implements org.springframework.security.core.userdetails.UserDetails {
 
     private final User user;
 
@@ -24,8 +24,11 @@ public class UserDetails implements org.springframework.security.core.userdetail
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(() -> "ToDo");
+    public Collection<? extends GrantedAuthority> getAuthorities()   {
+        return user.getRoles()
+                .stream()
+                .map(SecurityRole::new)
+                .collect(Collectors.toList());
     }
 
     @Override

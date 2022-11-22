@@ -30,13 +30,16 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
-                .mvcMatchers("/user/**", "/error").permitAll()
-                .anyRequest().authenticated()).
-             formLogin((form) -> form
-                .loginPage("/user/login")
-                .loginProcessingUrl("/process_login") // Передаст authProvider username and password и спринг сам проверит с помощью userDetails корректность.
-                .defaultSuccessUrl("/simple-english/hello", true)
-                .failureUrl("/user/login?error"));
+                        .mvcMatchers("/admin/**").hasRole("ADMIN")
+                        .mvcMatchers("/user/**", "/error").permitAll()
+                        .anyRequest().hasAnyRole("USER", "ADMIN")).
+                formLogin((form) -> form
+                    .loginPage("/user/login")
+                        .usernameParameter("login")
+                        .passwordParameter("password")
+                    .loginProcessingUrl("/login") // Передаст authProvider username and password и спринг сам проверит с помощью userDetails корректность.
+                    .defaultSuccessUrl("/simple-english/hello", true)
+                    .failureUrl("/user/login?error"));
 /*
                 .logout((logout) -> logout.logoutSuccessUrl("/login"));*/
 
