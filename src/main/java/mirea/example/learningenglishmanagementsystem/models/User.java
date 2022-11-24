@@ -15,8 +15,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class User {
 
     @Id
@@ -33,8 +32,10 @@ public class User {
     @Column(name = "email_address")
     private String emailAddress;
 
-    @Column(name = "popular_words_id")
-    private String popularWordId;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "popular_words_id", referencedColumnName = "id")
+    private Word popularWordId;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
@@ -52,8 +53,7 @@ public class User {
         if (id != null ? !id.equals(user.id) : user.id != null) return false;
         if (login != null ? !login.equals(user.login) : user.login != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (emailAddress != null ? !emailAddress.equals(user.emailAddress) : user.emailAddress != null) return false;
-        return popularWordId != null ? popularWordId.equals(user.popularWordId) : user.popularWordId == null;
+        return emailAddress != null ? emailAddress.equals(user.emailAddress) : user.emailAddress == null;
     }
 
     @Override
@@ -62,7 +62,6 @@ public class User {
         result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (emailAddress != null ? emailAddress.hashCode() : 0);
-        result = 31 * result + (popularWordId != null ? popularWordId.hashCode() : 0);
         return result;
     }
 }

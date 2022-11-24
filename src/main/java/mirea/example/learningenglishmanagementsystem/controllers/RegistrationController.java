@@ -38,10 +38,13 @@ public class RegistrationController {
         }
 
         userService.save(convertToUser(userDTO));
-        return "redirect:/simple-english/hello";
+        return "redirect:/user/login";
     }
 
     private User convertToUser(UserDTO userDTO) {
         return modelMapper.map(userDTO, User.class);
     }
+
+
+
 }

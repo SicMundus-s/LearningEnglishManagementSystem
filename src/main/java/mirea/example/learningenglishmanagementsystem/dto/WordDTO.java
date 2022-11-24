@@ -9,7 +9,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 public class WordDTO {
 
-    @Id
+
     private String word;
 
     private String translation;

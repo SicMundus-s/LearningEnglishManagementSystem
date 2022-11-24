@@ -19,13 +19,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @AllArgsConstructor
 public class WebSecurityConfig {
 
-    private final JpaUserDetailsService jpaUserDetailsService;
-
-    /*@Bean // Заменяется аннотацией service над JpaUserDetails, спринг сам возьмёт из контекста нужный бин
-    public UserDetailsService userDetailsService() {
-        return new JpaUserDetailsService();
-    }*/
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
@@ -38,10 +31,10 @@ public class WebSecurityConfig {
                         .usernameParameter("login")
                         .passwordParameter("password")
                     .loginProcessingUrl("/login") // Передаст authProvider username and password и спринг сам проверит с помощью userDetails корректность.
-                    .defaultSuccessUrl("/simple-english/hello", true)
-                    .failureUrl("/user/login?error"));
-/*
-                .logout((logout) -> logout.logoutSuccessUrl("/login"));*/
+                    .defaultSuccessUrl("/simple-english/home", true)
+                    .failureUrl("/user/login?error"))
+
+                    .logout((logout) -> logout.logoutSuccessUrl("/login"));
 
         return http.build();
     }

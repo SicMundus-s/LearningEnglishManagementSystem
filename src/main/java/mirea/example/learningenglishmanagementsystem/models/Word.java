@@ -9,21 +9,25 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
 @NoArgsConstructor
+@Table(name = "popular_words")
 public class Word {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     private String word;
 
-    private String translation;
+    private String translate;
 
+    @OneToOne(mappedBy = "popularWordId")
+    private User user;
 
     //private Boolean didTheUserTranslateCorrectly;
-    //private User user;
+
 }
