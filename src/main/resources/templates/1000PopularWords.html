@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Find last word passed</title>
@@ -7,5 +7,10 @@
 <body>
 <h1>Welcome!</h1>
 
+<form th:method="POST" th:action="@{/simple-english}" th:object="${word}">
+    <label for="word"> word: <span th:text="${word.getWord()}"> </span> </label>
+    <input type="text" id="word" name="word">
+    <input type="submit" value="translate!">
+</form>
 </body>
 </html>

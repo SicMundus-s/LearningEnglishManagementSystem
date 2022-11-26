@@ -23,6 +23,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
+    private final WordService wordService;
     private final RoleRepository roleRepository;
 
     @Transactional
@@ -31,6 +32,13 @@ public class UserService {
 
         Role userRole = roleRepository.findByName("ROLE_USER");
         user.setRoles(new HashSet<>(Collections.singletonList(userRole)));
+
+        user.setPopularWordId(wordService.getWordById(1));
+
         userRepository.save(user);
+    }
+
+    public User findByLogin(String username) {
+        return userRepository.findByLogin(username);
     }
 }
