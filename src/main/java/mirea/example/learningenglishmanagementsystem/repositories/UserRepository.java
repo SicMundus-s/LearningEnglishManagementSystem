@@ -16,4 +16,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     User findByLogin(String username);
 
+    @Query("UPDATE User u set u.popularWordId.id = :id + 1 where u.login = :login") // ?
+    void incrementPopularWordId(int id, String login);
 }

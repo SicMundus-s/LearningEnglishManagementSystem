@@ -22,33 +22,40 @@ import java.security.Principal;
 @AllArgsConstructor
 public class WordController {
 
-    private final WordService wordService;
     private final UserService userService;
-    private final ModelMapper modelMapper;
+    private final WordService wordService;
 
     @GetMapping("/1000-popular-words")
-    public ModelAndView lastWordPassed(Authentication authentication) {
+    public ModelAndView lastWordPassed() {
 
         ModelAndView modelAndView = new ModelAndView("1000PopularWords");
-        Object principal = authentication.getPrincipal();
 
-        String login;
-        if(principal instanceof UserDetails) {
-            login = ((UserDetails) principal).getUsername();
-        } else {
-            login = principal.toString();
-        }
-
-        modelAndView.addObject("word", userService.findByLogin(login).getPopularWordId());
+        modelAndView.addObject("words", wordService.findAll());
 
         return modelAndView;
     }
 
-    @PostMapping()
-    public String nextWord(@RequestParam(name = "word") String word) {
 
-        System.out.println(word);
-        return "redirect:/simple-english/1000-popular-words";
+    @PostMapping("/1000-popular-words")
+    public void test() {
+
+    }
+
+    @PostMapping("/intervalPov")
+    public void intervalPov() {
+
+    }
+
+    private String getLogin(Authentication authentication) {
+        String login = null;
+        Object principal = authentication.getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            login = ((UserDetails) principal).getUsername();
+        } else {
+            login = principal.toString();
+        }
+        return login;
     }
 
 

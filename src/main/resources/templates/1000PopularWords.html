@@ -6,11 +6,23 @@
 </head>
 <body>
 <h1>Welcome!</h1>
+<table>
+    <tr th:each="word : ${words}">
+        <td>
+            <form th:action="@{/simple-english/1000PopularWords}" th:method="POST">
+              <input type = 'submit' id="word" value="Добавить в словарь"/>
+            </form>
+        </td>
+        <td th:text = "${word.getId()} + '.' ">idWord</td>
+        <td th:text="${word.getWord()}">OriginalWord</td>
+        <td th:text="' - ' + ${word.getTranslate()}">Translate</td>
+        <td>
+            <form th:action="@{/simple-english/intervalPov}" th:method="POST">
+                <input type="submit" id="interval" value="Учить!"/>
+            </form>
+        </td>
+    </tr>
+</table>
 
-<form th:method="POST" th:action="@{/simple-english}" th:object="${word}">
-    <label for="word"> word: <span th:text="${word.getWord()}"> </span> </label>
-    <input type="text" id="word" name="word">
-    <input type="submit" value="translate!">
-</form>
 </body>
 </html>

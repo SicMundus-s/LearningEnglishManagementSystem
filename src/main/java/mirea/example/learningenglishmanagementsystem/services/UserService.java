@@ -33,8 +33,6 @@ public class UserService {
         Role userRole = roleRepository.findByName("ROLE_USER");
         user.setRoles(new HashSet<>(Collections.singletonList(userRole)));
 
-        user.setPopularWordId(wordService.getWordById(1));
-
         userRepository.save(user);
     }
 
