@@ -46,17 +46,6 @@ public class WordController {
 
     }
 
-    private String getLogin(Authentication authentication) {
-        String login = null;
-        Object principal = authentication.getPrincipal();
-
-        if (principal instanceof UserDetails) {
-            login = ((UserDetails) principal).getUsername();
-        } else {
-            login = principal.toString();
-        }
-        return login;
-    }
 
 
 }

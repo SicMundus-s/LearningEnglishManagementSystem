@@ -13,7 +13,7 @@
               <input type = 'submit' id="word" value="Добавить в словарь"/>
             </form>
         </td>
-        <td th:text = "${word.getId()} + '.' ">idWord</td>
+        <td th:text = "${word.getWord()} + '.' ">idWord</td>
         <td th:text="${word.getWord()}">OriginalWord</td>
         <td th:text="' - ' + ${word.getTranslate()}">Translate</td>
         <td>

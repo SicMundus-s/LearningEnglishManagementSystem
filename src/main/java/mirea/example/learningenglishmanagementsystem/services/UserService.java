@@ -5,6 +5,8 @@ import mirea.example.learningenglishmanagementsystem.models.Role;
 import mirea.example.learningenglishmanagementsystem.models.User;
 import mirea.example.learningenglishmanagementsystem.repositories.RoleRepository;
 import mirea.example.learningenglishmanagementsystem.repositories.UserRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +24,6 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
-
-    private final WordService wordService;
     private final RoleRepository roleRepository;
 
     @Transactional
@@ -38,5 +38,17 @@ public class UserService {
 
     public User findByLogin(String username) {
         return userRepository.findByLogin(username);
+    }
+
+    public String getLogin(Authentication authentication) {
+        String login = null;
+        Object principal = authentication.getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            login = ((UserDetails) principal).getUsername();
+        } else {
+            login = principal.toString();
+        }
+        return login;
     }
 }

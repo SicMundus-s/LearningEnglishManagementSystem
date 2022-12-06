@@ -10,10 +10,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -40,7 +37,7 @@ public class User {
     @JoinTable(name = "dictionary",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "word_id", referencedColumnName = "id"))
-    private Set<Word> words;
+    private List<Word> words;
 
 
     @ManyToMany(fetch = FetchType.EAGER)
