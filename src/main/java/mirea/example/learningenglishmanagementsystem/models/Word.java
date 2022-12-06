@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -24,9 +25,36 @@ public class Word {
 
     private String translate;
 
-    @OneToOne(mappedBy = "popularWordId")
-    private User user;
+    @ManyToMany(mappedBy = "words")
+    private Set<User> users;
+
+    @ManyToMany
+    @JoinTable(name = "categories_words",
+            joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "word_id", referencedColumnName = "id"))
+    private Set<Categories> categories;
 
     //private Boolean didTheUserTranslateCorrectly;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Word word1 = (Word) o;
+
+        if (id != word1.id) return false;
+        if (word != null ? !word.equals(word1.word) : word1.word != null) return false;
+        return translate != null ? translate.equals(word1.translate) : word1.translate == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (word != null ? word.hashCode() : 0);
+        result = 31 * result + (translate != null ? translate.hashCode() : 0);
+        return result;
+    }
+
 
 }

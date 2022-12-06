@@ -32,7 +32,7 @@ create table categories(
                            name varchar(100) not null
 );
 
-create table categories_of_words(
+create table categories_words(
                                     category_id int references categories(id) ON DELETE CASCADE,
                                     word_id int references words(id) ON DELETE CASCADE
 );
@@ -59,7 +59,7 @@ drop table users cascade;
 drop table role cascade;
 drop table user_roles;
 drop table categories;
-drop table categories_of_words;
+drop table categories_words;
 drop table dictionary;
 
 truncate table users cascade;

@@ -10,6 +10,9 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -33,9 +36,12 @@ public class User {
     private String emailAddress;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "popular_words_id", referencedColumnName = "id")
-    private Word popularWordId;
+    @ManyToMany
+    @JoinTable(name = "dictionary",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "word_id", referencedColumnName = "id"))
+    private Set<Word> words;
+
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
