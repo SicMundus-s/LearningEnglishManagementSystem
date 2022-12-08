@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,21 @@ public class WordController {
         return modelAndView;
     }
 
+    @GetMapping("/search")
+    public ModelAndView search() {
+        return new ModelAndView("search");
+    }
+
+    @PostMapping("/search")
+    public String search(Model model, @RequestParam(name = "search") String search) {
+
+        if(search.equals("")) {
+            return "redirect:/simple-english/search";
+        }
+
+        model.addAttribute("searchWords", wordService.search(search));
+        return "search";
+    }
 
     @PostMapping("/1000-popular-words")
     public void test() {

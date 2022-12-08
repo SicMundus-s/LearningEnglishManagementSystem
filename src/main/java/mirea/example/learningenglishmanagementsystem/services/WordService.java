@@ -19,4 +19,7 @@ public class WordService {
         return wordRepository.findAll();
     }
 
+    public List<Word> search(String search) {
+       return wordRepository.findByWordStartingWith(search);
+    }
 }
