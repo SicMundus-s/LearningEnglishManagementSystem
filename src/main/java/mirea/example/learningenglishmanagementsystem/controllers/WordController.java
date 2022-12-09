@@ -2,6 +2,7 @@ package mirea.example.learningenglishmanagementsystem.controllers;
 
 import lombok.AllArgsConstructor;
 import mirea.example.learningenglishmanagementsystem.models.User;
+import mirea.example.learningenglishmanagementsystem.models.Word;
 import mirea.example.learningenglishmanagementsystem.services.UserService;
 import mirea.example.learningenglishmanagementsystem.services.WordService;
 import org.modelmapper.ModelMapper;
@@ -41,7 +42,7 @@ public class WordController {
         return new ModelAndView("search");
     }
 
-    @PostMapping("/search")
+    @PostMapping("/search-word")
     public String search(Model model, @RequestParam(name = "search") String search) {
 
         if(search.equals("")) {
@@ -52,8 +53,15 @@ public class WordController {
         return "search";
     }
 
-    @PostMapping("/1000-popular-words")
-    public void test() {
+
+    @PostMapping("/add-word-dictionary")
+    public String addWordToDictionary(@RequestParam(name = "wordId") Integer wordId, Authentication authentication) {
+
+        User user = userService.findByLogin(userService.getLogin(authentication));
+        Word word = wordService.findOne(wordId);
+        userService.addWordToDictionary(word, user);
+
+        return "redirect:/simple-english/search";
 
     }
 
@@ -61,7 +69,5 @@ public class WordController {
     public void intervalPov() {
 
     }
-
-
 
 }

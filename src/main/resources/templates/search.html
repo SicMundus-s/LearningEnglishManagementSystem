@@ -1,23 +1,28 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Поиск по словарю</title>
 </head>
 <body>
 
-<form style="text-align: left" th:action="@{/simple-english/search}" th:method="POST">
+<form style="text-align: left" th:action="@{/simple-english/search-word}" th:method="POST">
     <input type="text" name="search" placeholder="Search..."/>
     <input type="submit" value="search"/>
 </form>
 
-<table>
-    <tr th:each="word : ${searchWords}">
-        <td th:text = "${word.getId()} + '.' ">idWord</td>
-        <td th:text="${word.getWord()}">OriginalWord</td>
-        <td th:text="' - ' + ${word.getTranslate()}">Translate</td>
-    </tr>
-</table>
+    <table>
+        <tr th:each="word : ${searchWords}">
+            <td>
+                <form th:action="@{/simple-english/add-word-dictionary}" th:method="POST">
+                    <input type="hidden" th:name="wordId" th:value="${word.getId()}"/>
+                    <input type="submit" name="word" value="добавить в словарь"/>
+                </form>
+            </td>
+            <td th:text="${word.id}"></td>
+            <td th:text="${word.word} + ' -' "></td>
+            <td th:text="${word.translate}"></td>
+    </table>
 
 </body>
 </html>

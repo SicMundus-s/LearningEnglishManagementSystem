@@ -6,13 +6,16 @@
 </head>
 <body>
 
-<table>
-    <tr th:each="word : ${wordsByUser}">
-        <td th:text = "${word.getId()} + '.' ">idWord</td>
-        <td th:text="${word.getWord()}">OriginalWord</td>
-        <td th:text="' - ' + ${word.getTranslate()}">Translate</td>
-    </tr>
-</table>
+    <table>
+        <tr>
+            <th>Слово</th>
+            <th>Перевод</th>
+        </tr>
+        <tr th:each="word : ${wordsByUser}">
+            <td th:text="${word.word}"></td>
+            <td th:text="${word.translate}"></td>
+        </tr>
+    </table>
 
 </body>
 </html>

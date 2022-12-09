@@ -5,13 +5,15 @@ package mirea.example.learningenglishmanagementsystem.models;
 // ToDo Добавить поле boolean - ответил правильно/неправильно 1. Ответил правильно - слову ставится true, ответил неправильно - false
 //  Тогда слово переходит в раздел интервального повторения
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
-@Data
+
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "words")
@@ -26,9 +28,9 @@ public class Word {
     private String translate;
 
     @ManyToMany(mappedBy = "words")
-    private Set<User> users;
+    private List<User> users;
 
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(name = "categories_words",
             joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "word_id", referencedColumnName = "id"))

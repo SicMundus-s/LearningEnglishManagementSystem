@@ -3,6 +3,7 @@ package mirea.example.learningenglishmanagementsystem.services;
 import lombok.AllArgsConstructor;
 import mirea.example.learningenglishmanagementsystem.models.Role;
 import mirea.example.learningenglishmanagementsystem.models.User;
+import mirea.example.learningenglishmanagementsystem.models.Word;
 import mirea.example.learningenglishmanagementsystem.repositories.RoleRepository;
 import mirea.example.learningenglishmanagementsystem.repositories.UserRepository;
 import org.springframework.security.core.Authentication;
@@ -38,6 +39,11 @@ public class UserService {
 
     public User findByLogin(String username) {
         return userRepository.findByLogin(username);
+    }
+
+    @Transactional
+    public void addWordToDictionary(Word word, User user) {
+
     }
 
     public String getLogin(Authentication authentication) {

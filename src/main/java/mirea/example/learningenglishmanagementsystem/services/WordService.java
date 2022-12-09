@@ -1,6 +1,7 @@
 package mirea.example.learningenglishmanagementsystem.services;
 
 import lombok.AllArgsConstructor;
+import mirea.example.learningenglishmanagementsystem.exception.WordNotFoundException;
 import mirea.example.learningenglishmanagementsystem.models.Word;
 import mirea.example.learningenglishmanagementsystem.repositories.WordRepository;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,10 @@ public class WordService {
 
     public List<Word> search(String search) {
        return wordRepository.findByWordStartingWith(search);
+    }
+
+    public Word findOne(Integer wordId) {
+        return wordRepository.findById(wordId)
+                .orElseThrow(() -> new WordNotFoundException("Word not found"));
     }
 }

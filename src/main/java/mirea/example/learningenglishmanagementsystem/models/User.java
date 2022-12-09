@@ -15,7 +15,8 @@ import java.util.*;
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class User {
 
     @Id
@@ -33,11 +34,11 @@ public class User {
     private String emailAddress;
 
 
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(name = "dictionary",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "word_id", referencedColumnName = "id"))
-    private List<Word> words;
+    private List<Word> words; // ToDo renave words -> dictionary
 
 
     @ManyToMany(fetch = FetchType.EAGER)

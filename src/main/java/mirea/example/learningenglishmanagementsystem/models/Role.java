@@ -12,7 +12,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "role")
-@Data
+@Getter
+@Setter
 public class Role {
 
     @Id
