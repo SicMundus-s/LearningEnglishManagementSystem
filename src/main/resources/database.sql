@@ -33,10 +33,9 @@ create table categories(
 );
 
 create table categories_words(
-                                    category_id int references categories(id) ON DELETE CASCADE,
-                                    word_id int references words(id) ON DELETE CASCADE
+                                 category_id int references categories(id) ON DELETE CASCADE,
+                                 word_id int references words(id) ON DELETE CASCADE
 );
-
 
 
 INSERT INTO role(name) VALUES ('ROLE_USER');

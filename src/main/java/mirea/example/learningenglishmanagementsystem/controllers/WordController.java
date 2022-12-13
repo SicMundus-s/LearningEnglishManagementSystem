@@ -38,8 +38,8 @@ public class WordController {
     }
 
     @GetMapping("/search")
-    public ModelAndView search() {
-        return new ModelAndView("search");
+    public String search() {
+        return "search";
     }
 
     @PostMapping("/search-word")
@@ -58,8 +58,8 @@ public class WordController {
     public String addWordToDictionary(@RequestParam(name = "wordId") Integer wordId, Authentication authentication) {
 
         User user = userService.findByLogin(userService.getLogin(authentication));
-        Word word = wordService.findOne(wordId);
-        userService.addWordToDictionary(word, user);
+        Word wordIdResult = wordService.findOne(wordId);
+        userService.addWordToDictionary(wordIdResult, user);
 
         return "redirect:/simple-english/search";
 

@@ -10,6 +10,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
+import java.util.SortedSet;
 
 
 @Getter
@@ -27,10 +28,11 @@ public class Word {
 
     private String translate;
 
-    @ManyToMany(mappedBy = "words")
-    private List<User> users;
-
-    @ManyToMany()
+    @ManyToMany(mappedBy = "words",
+                cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private SortedSet<User> users;
+    
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "categories_words",
             joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "word_id", referencedColumnName = "id"))

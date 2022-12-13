@@ -34,11 +34,12 @@ public class User {
     private String emailAddress;
 
 
-    @ManyToMany()
+    @ManyToMany(
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "dictionary",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "word_id", referencedColumnName = "id"))
-    private List<Word> words; // ToDo renave words -> dictionary
+    private SortedSet<Word> words; // ToDo renave words -> dictionary
 
 
     @ManyToMany(fetch = FetchType.EAGER)
