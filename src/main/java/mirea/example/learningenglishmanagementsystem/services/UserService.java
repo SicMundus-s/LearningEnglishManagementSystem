@@ -39,8 +39,8 @@ public class UserService {
     }
 
     @Transactional
-    public void addWordToDictionary(Word wordIdResult, User user) {
-        user.getWords().add(wordIdResult);
+    public void addWordToDictionary(Word word, User user) {
+        user.getWords().add(word);
     }
 
     public String getLogin(Authentication authentication) {

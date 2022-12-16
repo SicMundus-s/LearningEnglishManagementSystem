@@ -8,9 +8,7 @@ package mirea.example.learningenglishmanagementsystem.models;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
+import java.util.*;
 
 
 @Getter
@@ -29,8 +27,8 @@ public class Word {
     private String translate;
 
     @ManyToMany(mappedBy = "words",
-                cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private SortedSet<User> users;
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<User> users;
     
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "categories_words",

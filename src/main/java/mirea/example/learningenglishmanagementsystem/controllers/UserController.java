@@ -1,16 +1,14 @@
 package mirea.example.learningenglishmanagementsystem.controllers;
 
 import lombok.AllArgsConstructor;
-import mirea.example.learningenglishmanagementsystem.dto.UserDTO;
-import mirea.example.learningenglishmanagementsystem.models.User;
 import mirea.example.learningenglishmanagementsystem.services.UserService;
 import mirea.example.learningenglishmanagementsystem.services.WordService;
-import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +33,7 @@ public class UserController {
     @GetMapping("/dictionary")
     public ModelAndView dictionary(Authentication authentication) {
         ModelAndView modelAndView = new ModelAndView("dictionary");
+
 
         modelAndView.addObject("wordsByUser", userService
                 .findByLogin(userService.getLogin(authentication))

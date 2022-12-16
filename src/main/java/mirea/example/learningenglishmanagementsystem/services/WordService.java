@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional(readOnly = true)
@@ -28,4 +29,5 @@ public class WordService {
         return wordRepository.findById(wordId)
                 .orElseThrow(() -> new WordNotFoundException("Word not found"));
     }
+
 }

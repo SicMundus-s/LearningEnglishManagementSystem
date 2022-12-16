@@ -58,8 +58,8 @@ public class WordController {
     public String addWordToDictionary(@RequestParam(name = "wordId") Integer wordId, Authentication authentication) {
 
         User user = userService.findByLogin(userService.getLogin(authentication));
-        Word wordIdResult = wordService.findOne(wordId);
-        userService.addWordToDictionary(wordIdResult, user);
+        Word word = wordService.findOne(wordId);
+        userService.addWordToDictionary(word, user);
 
         return "redirect:/simple-english/search";
 

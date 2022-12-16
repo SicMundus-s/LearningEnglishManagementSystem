@@ -6,10 +6,13 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OrderBy;
+import javax.persistence.Table;
 import java.util.*;
 
 @Entity
@@ -39,7 +42,8 @@ public class User {
     @JoinTable(name = "dictionary",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "word_id", referencedColumnName = "id"))
-    private SortedSet<Word> words; // ToDo renave words -> dictionary
+    @OrderBy(value = "word ASC")
+    private Set<Word> words; // ToDo renave words -> dictionary
 
 
     @ManyToMany(fetch = FetchType.EAGER)
