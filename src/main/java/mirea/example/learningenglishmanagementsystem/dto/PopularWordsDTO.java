@@ -11,6 +11,8 @@ import lombok.Setter;
 @Setter
 public class PopularWordsDTO {
 
+    private int id;
+
     private String word;
 
     private String translate;

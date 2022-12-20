@@ -35,7 +35,7 @@ public class WordController {
 
         ModelAndView modelAndView = new ModelAndView("1000PopularWords");
 
-        modelAndView.addObject("words", wordService.getPopularWords());
+        modelAndView.addObject("popularWords", wordService.getPopularWords());
 
         return modelAndView;
     }
@@ -58,11 +58,17 @@ public class WordController {
 
 
     @PostMapping("/add-word-dictionary")
-    public String addWordToDictionary(@RequestParam(name = "wordId") Integer wordId, Authentication authentication) {
+    public String addWordToDictionary(@RequestParam(name = "checkingListPopularWords", required = false, defaultValue = "0") Integer checkPopularWords,
+                                      @RequestParam(name = "wordId") Integer wordId,
+                                      Authentication authentication) {
 
         User user = userService.findByLogin(userService.getLogin(authentication));
         Word word = wordService.findOne(wordId);
         userService.addWordToDictionary(word, user);
+
+        if(checkPopularWords > 0) {
+            return "redirect:/simple-english/1000-popular-words";
+        }
 
         return "redirect:/simple-english/search";
 

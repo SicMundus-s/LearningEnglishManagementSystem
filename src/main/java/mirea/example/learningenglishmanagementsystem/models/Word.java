@@ -19,9 +19,9 @@ import java.util.SortedSet;
 @Entity
 @NoArgsConstructor
 @Table(name = "words")
-@NamedNativeQuery(name = "FindPopularWordsDTO", query = "select w.word, w.translate, count(d.word_id) as countRepetitionsOfWordsFromUsers " +
+@NamedNativeQuery(name = "FindPopularWordsDTO", query = "select w.id, w.word, w.translate, count(d.word_id) as countRepetitionsOfWordsFromUsers " +
         "from dictionary d left join words w on d.word_id = w.id " +
-        "group by w.word, w.translate " +
+        "group by w.id, w.word, w.translate " +
         "order by countRepetitionsOfWordsFromUsers desc " +
         "LIMIT 1000",
         resultSetMapping = "PopularWordsDTO")
@@ -31,6 +31,7 @@ import java.util.SortedSet;
                 @ConstructorResult(
                         targetClass = PopularWordsDTO.class,
                         columns = {
+                                @ColumnResult(name = "id", type = Integer.class),
                                 @ColumnResult(name = "word", type = String.class),
                                 @ColumnResult(name = "translate", type = String.class),
                                 @ColumnResult(name = "countRepetitionsOfWordsFromUsers", type = Integer.class )
@@ -42,7 +43,7 @@ public class Word {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String word;
 
@@ -57,8 +58,6 @@ public class Word {
             joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "word_id", referencedColumnName = "id"))
     private Set<Categories> categories;
-
-    //private Boolean didTheUserTranslateCorrectly;
 
     @Override
     public boolean equals(Object o) {
