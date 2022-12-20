@@ -9,13 +9,12 @@
 <table>
     <tr th:each="word : ${words}">
         <td>
-            <form th:action="@{/simple-english/1000PopularWords}" th:method="POST">
+            <form th:action="@{/simple-english/1000-popular-words}" th:method="POST">
               <input type = 'submit' id="word" value="Добавить в словарь"/>
             </form>
         </td>
-        <td th:text = "${word.getWord()} + '.' ">idWord</td>
-        <td th:text="${word.getWord()}">OriginalWord</td>
-        <td th:text="' - ' + ${word.getTranslate()}">Translate</td>
+        <td th:text = "${word.getWord()} + '.' ">Word</td>
+        <td th:text="${word.getTranslate()}">Translate</td>
         <td>
             <form th:action="@{/simple-english/intervalPov}" th:method="POST">
                 <input type="submit" id="interval" value="Учить!"/>

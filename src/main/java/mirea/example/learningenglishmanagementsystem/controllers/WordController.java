@@ -3,6 +3,7 @@ package mirea.example.learningenglishmanagementsystem.controllers;
 import lombok.AllArgsConstructor;
 import mirea.example.learningenglishmanagementsystem.models.User;
 import mirea.example.learningenglishmanagementsystem.models.Word;
+import mirea.example.learningenglishmanagementsystem.repositories.RoleRepository;
 import mirea.example.learningenglishmanagementsystem.services.UserService;
 import mirea.example.learningenglishmanagementsystem.services.WordService;
 import org.modelmapper.ModelMapper;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/simple-english")
@@ -27,12 +29,13 @@ public class WordController {
     private final UserService userService;
     private final WordService wordService;
 
+
     @GetMapping("/1000-popular-words")
     public ModelAndView lastWordPassed() {
 
         ModelAndView modelAndView = new ModelAndView("1000PopularWords");
 
-        modelAndView.addObject("words", wordService.findAll());
+        modelAndView.addObject("words", wordService.getPopularWords());
 
         return modelAndView;
     }
@@ -45,7 +48,7 @@ public class WordController {
     @PostMapping("/search-word")
     public String search(Model model, @RequestParam(name = "search") String search) {
 
-        if(search.equals("")) {
+        if (search.equals("")) {
             return "redirect:/simple-english/search";
         }
 

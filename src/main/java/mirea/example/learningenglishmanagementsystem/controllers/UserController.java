@@ -21,8 +21,6 @@ import java.util.Collections;
 @RequestMapping("/simple-english")
 @AllArgsConstructor
 public class UserController {
-
-    private final WordService wordService;
     private final UserService userService;
 
     @GetMapping("/home")
@@ -33,7 +31,6 @@ public class UserController {
     @GetMapping("/dictionary")
     public ModelAndView dictionary(Authentication authentication) {
         ModelAndView modelAndView = new ModelAndView("dictionary");
-
 
         modelAndView.addObject("wordsByUser", userService
                 .findByLogin(userService.getLogin(authentication))

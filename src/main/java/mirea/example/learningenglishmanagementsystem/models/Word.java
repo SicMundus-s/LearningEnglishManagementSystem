@@ -6,9 +6,12 @@ package mirea.example.learningenglishmanagementsystem.models;
 //  Тогда слово переходит в раздел интервального повторения
 
 import lombok.*;
+import mirea.example.learningenglishmanagementsystem.dto.PopularWordsDTO;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.List;
+import java.util.Set;
+import java.util.SortedSet;
 
 
 @Getter
@@ -16,6 +19,25 @@ import java.util.*;
 @Entity
 @NoArgsConstructor
 @Table(name = "words")
+@NamedNativeQuery(name = "FindPopularWordsDTO", query = "select w.word, w.translate, count(d.word_id) as countRepetitionsOfWordsFromUsers " +
+        "from dictionary d left join words w on d.word_id = w.id " +
+        "group by w.word, w.translate " +
+        "order by countRepetitionsOfWordsFromUsers desc " +
+        "LIMIT 1000",
+        resultSetMapping = "PopularWordsDTO")
+@SqlResultSetMapping(
+        name = "PopularWordsDTO",
+        classes = {
+                @ConstructorResult(
+                        targetClass = PopularWordsDTO.class,
+                        columns = {
+                                @ColumnResult(name = "word", type = String.class),
+                                @ColumnResult(name = "translate", type = String.class),
+                                @ColumnResult(name = "countRepetitionsOfWordsFromUsers", type = Integer.class )
+                        }
+                )
+        }
+)
 public class Word {
 
     @Id

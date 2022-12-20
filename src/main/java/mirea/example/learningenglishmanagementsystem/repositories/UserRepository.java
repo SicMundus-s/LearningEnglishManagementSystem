@@ -6,17 +6,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-//    @Query("""
-//    select u FROM User u WHERE u.login = :username
-//    """)
     Optional<User> findUserByLogin(String login);
 
     User findByLogin(String username);
+
 
 }

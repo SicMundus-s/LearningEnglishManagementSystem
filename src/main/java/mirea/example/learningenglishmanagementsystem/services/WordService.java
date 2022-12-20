@@ -1,6 +1,8 @@
 package mirea.example.learningenglishmanagementsystem.services;
 
 import lombok.AllArgsConstructor;
+import mirea.example.learningenglishmanagementsystem.dto.PopularWordsDTO;
+import mirea.example.learningenglishmanagementsystem.dto.WordDTO;
 import mirea.example.learningenglishmanagementsystem.exception.WordNotFoundException;
 import mirea.example.learningenglishmanagementsystem.models.Word;
 import mirea.example.learningenglishmanagementsystem.repositories.WordRepository;
@@ -28,6 +30,10 @@ public class WordService {
     public Word findOne(Integer wordId) {
         return wordRepository.findById(wordId)
                 .orElseThrow(() -> new WordNotFoundException("Word not found"));
+    }
+
+    public Set<PopularWordsDTO> getPopularWords() {
+        return wordRepository.getPopularWords();
     }
 
 }
