@@ -59,6 +59,9 @@ public class Word {
             inverseJoinColumns = @JoinColumn(name = "word_id", referencedColumnName = "id"))
     private Set<Categories> categories;
 
+    @OneToMany(mappedBy = "word")// OneToMany ??? Зачем ManyToMany
+    private Set<IntervalRepetition> intervalRepetitionWords;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
